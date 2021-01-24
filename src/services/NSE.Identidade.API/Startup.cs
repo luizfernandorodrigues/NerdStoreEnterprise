@@ -1,56 +1,45 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NSE.Identidade.API.Data;
+using NSE.Identidade.API.Configuration;
 
 namespace NSE.Identidade.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         public IConfiguration Configuration { get; }
 
-        
-        public void ConfigureServices(IServiceCollection services)
+        public Startup(IHostEnvironment hostEnvironment)
         {
-            services.AddDbContext<ApplicationDbContext>(optionsAction: options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(hostEnvironment.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", true, true)
+                .AddEnvironmentVariables();
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            if (hostEnvironment.IsDevelopment())
+                builder.AddUserSecrets<Startup>();
 
-            services.AddControllers();
+            Configuration = builder.Build();
         }
 
-        
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddIdentityConfiguration(Configuration);
+
+            services.AddApiConfiguration();
+
+            services.AddSwaggerConfiguration();
+        }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseSwaggerConfiguration();
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseAuthentication();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseApiconfiguration(env);
         }
     }
 }
