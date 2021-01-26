@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
 
-namespace NSE.Identidade.API.Configuration
+namespace NSE.Catalogo.API.Configuration
 {
     public static class SwaggerConfig
     {
@@ -13,7 +13,7 @@ namespace NSE.Identidade.API.Configuration
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "NerdStore Enterprise Identity API",
+                    Title = "NerdStore Enterprise Catálogo API",
                     Description = "Está API faz parte do curso ASP.NET Core Enterprise Applications",
                     Contact = new OpenApiContact() { Name = "Luiz Fernando Rodrigues Pereira", Email = "luizfernando_rodrigues12@hotmail.com" },
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
@@ -30,5 +30,6 @@ namespace NSE.Identidade.API.Configuration
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
             });
         }
+
     }
 }
