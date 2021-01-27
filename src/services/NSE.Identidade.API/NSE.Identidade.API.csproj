@@ -5,7 +5,7 @@
     <UserSecretsId>ae747570-3672-43f4-994d-41253b27c3c3</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
-    <AssemblyVersion>1.2021.1.26</AssemblyVersion>
+    <AssemblyVersion>1.2021.1.27</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +22,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\building blocks\NSE.WebAPI.Core\NSE.WebAPI.Core.csproj" />
   </ItemGroup>
 
 
