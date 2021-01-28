@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Refit;
+using Polly.CircuitBreaker;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -24,19 +24,15 @@ namespace NSE.WebApp.MVC.Extensions
             {
                 HandleRequestExceptionAsync(httpContext, ex.StatusCode);
             }
-            catch(ValidationApiException ex)
+            catch (BrokenCircuitException)
             {
-                HandleRequestExceptionAsync(httpContext, ex.StatusCode);
-            }
-            catch (ApiException ex)
-            {
-                HandleRequestExceptionAsync(httpContext, ex.StatusCode);
+                HandleCircuitBreakerExceptionAsync(httpContext);
             }
         }
 
         private static void HandleRequestExceptionAsync(HttpContext httpContext, HttpStatusCode statusCode)
         {
-            if(statusCode == HttpStatusCode.Unauthorized)
+            if (statusCode == HttpStatusCode.Unauthorized)
             {
                 httpContext.Response.Redirect($"/login?ReturnUrl={httpContext.Request.Path}");
 
@@ -44,6 +40,11 @@ namespace NSE.WebApp.MVC.Extensions
             }
 
             httpContext.Response.StatusCode = (int)statusCode;
+        }
+
+        private static void HandleCircuitBreakerExceptionAsync(HttpContext context)
+        {
+            context.Response.Redirect("/sistema-indisponivel");
         }
     }
 }
