@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>b1f59cb1-4443-4dd4-9808-a41fe0b336a2</UserSecretsId>
+    <UserSecretsId>04a552d2-1bfe-418b-87e3-840033819036</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
     <AssemblyVersion>1.2021.2.4</AssemblyVersion>
@@ -24,6 +24,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\building blocks\NSE.Core\NSE.Core.csproj" />
     <ProjectReference Include="..\..\building blocks\NSE.WebAPI.Core\NSE.WebAPI.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Events\" />
+    <Folder Include="Application\Queries\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 
