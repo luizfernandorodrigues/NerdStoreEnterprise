@@ -44,7 +44,7 @@ namespace NSE.Core.DomainObjects
             var soma = 0;
 
             for (var i = 0; i < 9; i++)
-                soma += (10 - 1) * numeros[i];
+                soma += (10 - i) * numeros[i];
 
             var resultado = soma % 11;
 

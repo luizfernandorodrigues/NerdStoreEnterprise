@@ -1,17 +1,11 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using NSE.Clientes.API.Configuration;
 using NSE.WebAPI.Core.Identidade;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NSE.Clientes.API
 {
@@ -42,7 +36,7 @@ namespace NSE.Clientes.API
 
             services.AddSwaggerConfiguration();
 
-            //services.AddMediatR(typeof(Startup));
+            services.AddMediatR(typeof(Startup));
 
             services.RegisterServices();
         }
