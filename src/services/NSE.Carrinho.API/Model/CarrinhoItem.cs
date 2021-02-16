@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using System;
+using System.Text.Json.Serialization;
 
 namespace NSE.Carrinho.API.Model
 {
@@ -12,6 +13,8 @@ namespace NSE.Carrinho.API.Model
         public decimal Valor { get; set; }
         public string Imagem { get; set; }
         public Guid CarrinhoId { get; set; }
+
+        [JsonIgnore]
         public CarrinhoCliente CarrinhoCliente { get; set; }
 
         public CarrinhoItem()
@@ -21,7 +24,7 @@ namespace NSE.Carrinho.API.Model
 
         internal bool EhValido()
         {
-            return new ItemPedidoValidation().Validate(this).IsValid;
+            return new ItemCarrinhoValidation().Validate(this).IsValid;
         }
 
         internal void AssociarCarrinho(Guid carrinhoId)
@@ -38,17 +41,22 @@ namespace NSE.Carrinho.API.Model
         {
             Quantidade += unidades;
         }
-    }
 
-    public class ItemPedidoValidation: AbstractValidator<CarrinhoItem>
-    {
-        public ItemPedidoValidation()
+        internal void AtualizarUnidades(int unidades)
         {
-            RuleFor(c => c.ProdutoId).NotEqual(Guid.Empty).WithMessage("Id do produto inválido");
-            RuleFor(c => c.Nome).NotEmpty().WithMessage("O nome do produto não foi informado");
-            RuleFor(c => c.Quantidade).GreaterThan(0).WithMessage("A quantidade miníma de um item é 1");
-            RuleFor(c => c.Quantidade).LessThan(5).WithMessage("A quantidade máxima de um item é 5");
-            RuleFor(c => c.Valor).GreaterThan(0).WithMessage("O valor do item precisa ser maior que 0");
+            Quantidade = unidades;
+        }
+
+        public class ItemCarrinhoValidation : AbstractValidator<CarrinhoItem>
+        {
+            public ItemCarrinhoValidation()
+            {
+                RuleFor(c => c.ProdutoId).NotEqual(Guid.Empty).WithMessage("Id do produto inválido");
+                RuleFor(c => c.Nome).NotEmpty().WithMessage("O nome do produto não foi informado");
+                RuleFor(c => c.Quantidade).GreaterThan(0).WithMessage(item => $"A quantidade miníma para o {item.Nome} é 1");
+                RuleFor(c => c.Quantidade).LessThanOrEqualTo(5).WithMessage(item => $"A quantidade máxima do {item.Nome} é 5");
+                RuleFor(c => c.Valor).GreaterThan(0).WithMessage(item => $"O valor do {item.Nome} precisa ser maior que 0");
+            }
         }
     }
 }
