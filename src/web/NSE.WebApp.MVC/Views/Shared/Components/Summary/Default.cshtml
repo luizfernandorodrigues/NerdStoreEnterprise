@@ -1,8 +1,11 @@
-﻿@model CarrinhoViewModel
+﻿
+@if (ViewData.ModelState.ErrorCount > 0)
+{
+    <div style="padding-top: 15px;"></div>
 
-<div style="padding-right: 15px">
-    <a asp-controller="Carrinho" asp-action="Index" class="widget-header">
-        <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
-        <span class="badge badge-pill badge-danger notify">@Model?.Itens.Count()</span>
-    </a>
-</div>
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h3 id="msgRetorno" style="padding-top: 20px">Opa! Algo deu errado :(</h3>
+        <div style="padding-top: 20px" asp-validation-summary="All" class="text-danger"></div>
+    </div>
+}

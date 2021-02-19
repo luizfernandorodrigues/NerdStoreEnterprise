@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace NSE.Carrinho.API.Data
 {
-    public class CarrinhoContext :DbContext
+    public class CarrinhoContext : DbContext
     {
         public CarrinhoContext(DbContextOptions<CarrinhoContext> options) : base(options)
         {
