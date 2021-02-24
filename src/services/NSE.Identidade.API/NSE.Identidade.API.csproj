@@ -5,7 +5,7 @@
     <UserSecretsId>ae747570-3672-43f4-994d-41253b27c3c3</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
-    <AssemblyVersion>1.2021.2.20</AssemblyVersion>
+    <AssemblyVersion>1.2021.2.24</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
