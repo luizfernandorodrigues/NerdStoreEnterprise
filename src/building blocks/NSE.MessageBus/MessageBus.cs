@@ -72,7 +72,7 @@ namespace NSE.MessageBus
             _bus.Subscribe(subscriptionId, onMessage);
         }
 
-        public void SubscribeAsync<T>(string subscriptionId, Func<Task, Task> onMessage) where T : class
+        public void SubscribeAsync<T>(string subscriptionId, Func<T, Task> onMessage) where T : class
         {
             TryConnect();
 
