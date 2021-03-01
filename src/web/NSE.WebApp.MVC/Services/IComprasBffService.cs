@@ -1,6 +1,7 @@
 ﻿using NSE.Core.Communication;
 using NSE.WebApp.MVC.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NSE.WebApp.MVC.Services
@@ -13,6 +14,10 @@ namespace NSE.WebApp.MVC.Services
         Task<ResponseResult> RemoverItemCarrinho(Guid produtoId);
         Task<int> ObterQuantidadeCarrinho();
         Task<ResponseResult> AplicarVoucherCarrinho(string voucher);
+        PedidoTransacaoViewModel MapearParaPedido(CarrinhoViewModel carrinho, EnderecoViewModel endereco);
+        Task<ResponseResult> FinalizarPedido(PedidoTransacaoViewModel pedidoTransacao);
+        Task<PedidoViewModel> ObterUltimoPedido();
+        Task<IEnumerable<PedidoViewModel>> ObterListaPorClienteId();
     }
 }
 

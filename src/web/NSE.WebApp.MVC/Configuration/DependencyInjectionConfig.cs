@@ -24,15 +24,19 @@ namespace NSE.WebApp.MVC.Configuration
 
             #region HttpServices
 
-            services.AddTransient<HttpClientAuthorizationDelegateHandler>();
+            services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
 
-            services.AddHttpClient<IAutenticacaoService, AutenticacaoService>().AddPolicyHandler(PollyExtension.EsperarTentar()).AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+            services.AddHttpClient<IAutenticacaoService, AutenticacaoService>().AddPolicyHandler(PollyExtensions.EsperarTentar()).AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<ICatalogoService, CatalogoService>()
-                .AddHttpMessageHandler<HttpClientAuthorizationDelegateHandler>().AddPolicyHandler(PollyExtension.EsperarTentar()).AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>().AddPolicyHandler(PollyExtensions.EsperarTentar()).AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<IComprasBffService, ComprasBffService>()
-                .AddHttpMessageHandler<HttpClientAuthorizationDelegateHandler>().AddPolicyHandler(PollyExtension.EsperarTentar()).AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>().AddPolicyHandler(PollyExtensions.EsperarTentar()).AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+
+            services.AddHttpClient<IClienteService, ClienteService>()
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>().AddPolicyHandler(PollyExtensions.EsperarTentar()).AddTransientHttpErrorPolicy(
+                  p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             #endregion
         }
@@ -40,7 +44,7 @@ namespace NSE.WebApp.MVC.Configuration
 
     #region PollyExtension
 
-    public static class PollyExtension
+    public static class PollyExtensions
     {
         public static AsyncRetryPolicy<HttpResponseMessage> EsperarTentar()
         {
