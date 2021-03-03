@@ -29,6 +29,7 @@ namespace NSE.Catalogo.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApiConfiguration(Configuration);
+            services.AddMessageBusConfiguration(Configuration);
             services.AddJwtConfiguration(Configuration);
             services.AddSwaggerConfiguration();
             services.RegisterServices();
