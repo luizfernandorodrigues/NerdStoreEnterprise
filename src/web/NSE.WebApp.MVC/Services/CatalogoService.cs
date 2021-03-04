@@ -2,7 +2,6 @@
 using NSE.WebApp.MVC.Extensions;
 using NSE.WebApp.MVC.Models;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -28,13 +27,13 @@ namespace NSE.WebApp.MVC.Services
             return await DeserializarObjetoResponse<ProdutoViewModel>(response);
         }
 
-        public async Task<IEnumerable<ProdutoViewModel>> ObterTodos()
+        public async Task<PagedViewModel<ProdutoViewModel>> ObterTodos(int pageSize, int pageIndex, string query = null)
         {
-            var response = await _httpCliente.GetAsync($"/catalogo/produtos/");
+            var response = await _httpCliente.GetAsync($"/catalogo/produtos?ps={pageSize}&page={pageIndex}&q={query}");
 
             TratarErrosResponse(response);
 
-            return await DeserializarObjetoResponse<IEnumerable<ProdutoViewModel>>(response);
+            return await DeserializarObjetoResponse<PagedViewModel<ProdutoViewModel>>(response);
         }
     }
 }
