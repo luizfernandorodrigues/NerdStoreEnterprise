@@ -17,7 +17,7 @@ namespace NSE.WebApp.MVC.Extensions
             return valor > 0 ? string.Format(Thread.CurrentThread.CurrentCulture, "{0:C}", valor) : "Gratuito";
         }
 
-        public static string HasEmailForGravatar(this RazorPage page, string email)
+        public static string HashEmailForGravatar(this RazorPage page, string email)
         {
             var md5Hasher = MD5.Create();
             var data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(email));

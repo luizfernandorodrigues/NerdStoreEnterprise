@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using NetDevPack.Security.JwtSigningCredentials;
 using NSE.Identidade.API.Data;
 using NSE.Identidade.API.Extensions;
-using NSE.WebAPI.Core.Identidade;
 
 namespace NSE.Identidade.API.Configuration
 {
@@ -18,8 +17,6 @@ namespace NSE.Identidade.API.Configuration
             services.AddDbContext<ApplicationDbContext>(optionsAction: options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddErrorDescriber<IdentityMensagensPortugues>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-
-            services.AddJwtConfiguration(configuration);
 
             return services;
         }
