@@ -61,7 +61,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pedidos.Domain", "src\s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pedidos.Infra", "src\services\NSE.Pedidos.Infra\NSE.Pedidos.Infra.csproj", "{41CBBA50-72D5-4523-A47D-E908259A011D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.Pagamentos.NerdsPag", "src\services\NSE.Pagamentos.NerdsPag\NSE.Pagamentos.NerdsPag.csproj", "{12EF1298-57FE-49F3-B606-7BA07E4D17C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pagamentos.NerdsPag", "src\services\NSE.Pagamentos.NerdsPag\NSE.Pagamentos.NerdsPag.csproj", "{12EF1298-57FE-49F3-B606-7BA07E4D17C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
