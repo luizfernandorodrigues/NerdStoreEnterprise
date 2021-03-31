@@ -20,6 +20,15 @@
                 "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
             }
         },
+
+        "SelfHosting": {
+            "commandName": "Project",
+            "launchBrowser": true,
+           "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "applicationUrl": "https://localhost:5801;http://localhosto:5802"
+        },
         "NSE.WebApp.MVC": {
             "commandName": "Project",
             "launchBrowser": true,

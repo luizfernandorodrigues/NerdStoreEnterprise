@@ -38,7 +38,6 @@ namespace NSE.Carrinho.API.Controllers
                 ManipularNovoCarrinho(item);
             else
                 ManipularCarrinhoExistente(carrinho, item);
-
             
 
             if (!OperacaoValida())
